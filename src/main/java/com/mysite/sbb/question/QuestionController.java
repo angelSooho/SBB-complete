@@ -34,16 +34,6 @@ public class QuestionController {
 	private final QuestionService questionService;
 	private final UserService userService;
 
-    @PostConstruct
-    public void init() {
-        for (int idx = 0; idx < 20; idx++) {
-            Question question = new Question("스프링부트 모델 질문입니다.",
-                    "id는 자동으로 생성되나요?", LocalDateTime.now());
-            questionService.save(question);
-        }
-    }
-
-
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page,
     		@RequestParam(value = "kw", defaultValue = "") String kw) {
