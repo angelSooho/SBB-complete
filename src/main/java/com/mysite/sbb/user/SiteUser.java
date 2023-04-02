@@ -1,16 +1,16 @@
 package com.mysite.sbb.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.mysite.sbb.answer.Answer;
+import com.mysite.sbb.question.Question;
+import jakarta.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SiteUser {
 
     @Id
@@ -25,4 +25,11 @@ public class SiteUser {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    public SiteUser(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
 }

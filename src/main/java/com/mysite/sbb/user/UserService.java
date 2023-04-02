@@ -17,11 +17,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public SiteUser create(String username, String email, String password) {
-        SiteUser user = new SiteUser();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
-        this.userRepository.save(user);
+        SiteUser user = new SiteUser(username, passwordEncoder.encode(password), email);
+        userRepository.save(user);
         return user;
     }
     
@@ -30,7 +27,7 @@ public class UserService {
         if (siteUser.isPresent()) {
             return siteUser.get();
         } else {
-            throw new DataNotFoundException("siteuser not found");
+            throw new DataNotFoundException("siteUser not found");
         }
     }
 }
