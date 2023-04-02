@@ -20,7 +20,7 @@ import lombok.Setter;
 public class Question extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer question_id;
+    private Long question_id;
 
     @Column(length = 200, nullable = false)
     private String subject;
@@ -47,5 +47,9 @@ public class Question extends BaseTimeEntity {
     public void modify(String subject, String content) {
         this.subject = subject;
         this.content = content;
+    }
+
+    public void ListAdd(Answer answer) {
+        this.answerList.add(answer);
     }
 }

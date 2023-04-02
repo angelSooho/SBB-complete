@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.mysite.sbb.user.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final UserRepository userRepository;
     
     private Specification<Question> search(String kw) {
         return new Specification<>() {
@@ -56,7 +58,7 @@ public class QuestionService {
         return this.questionRepository.findAll(spec, pageable);
     }
     
-    public Question getQuestion(Integer id) {  
+    public Question getQuestion(Long id) {
         Optional<Question> question = this.questionRepository.findById(id);
         if (question.isPresent()) {
             return question.get();
@@ -71,9 +73,11 @@ public class QuestionService {
     }
     
     public void modify(Question question, String subject, String content) {
-        question.modify(subject, content);
-        question.setModifyDate(LocalDateTime.now());
-        this.questionRepository.save(question);
+        Optional<Question> byId = questionRepository.findById(question.getQuestion_id());
+        if (byId.isPresent()) {
+            question.modify(subject, content);
+        }
+//        this.questionRepository.save(question);
     }
     
     public void delete(Question question) {
