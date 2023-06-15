@@ -78,7 +78,7 @@ public class QuestionController {
         }
         questionForm.setSubject(question.getSubject());
         questionForm.setContent(question.getContent());
-        return "question_form";//sdsd
+        return "question_form";//sdsdsdsd
     }
     
     @PreAuthorize("isAuthenticated()")
